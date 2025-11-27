@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <title>Unit Testing & Design – Question Bank</title>
@@ -11,7 +10,7 @@
       --bg-alt: #020617;
       --card: #020617;
       --accent: #38bdf8;
-      --accent-soft: rgba(56, 189, 248, 0.1);
+      --accent-soft: rgba(56,189,248,0.1);
       --text: #e5e7eb;
       --text-soft: #9ca3af;
       --border: #1f2937;
@@ -19,7 +18,7 @@
       --code-bg: #020617;
       --radius-lg: 16px;
       --radius-sm: 8px;
-      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.7);
+      --shadow-soft: 0 18px 40px rgba(15,23,42,0.7);
     }
 
     * {
@@ -59,8 +58,8 @@
       letter-spacing: 0.12em;
       padding: 4px 10px;
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15,23,42,0.8);
+      border: 1px solid rgba(148,163,184,0.4);
       color: var(--text-soft);
       width: fit-content;
     }
@@ -96,8 +95,8 @@
     .meta-pill {
       padding: 4px 10px;
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(55, 65, 81, 0.8);
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(55,65,81,0.8);
     }
 
     .layout {
@@ -116,7 +115,7 @@
     .card {
       background: radial-gradient(circle at top left, #111827 0, #020617 50%);
       border-radius: var(--radius-lg);
-      border: 1px solid rgba(148, 163, 184, 0.18);
+      border: 1px solid rgba(148,163,184,0.18);
       box-shadow: var(--shadow-soft);
       padding: 18px 18px 16px;
       backdrop-filter: blur(16px);
@@ -163,7 +162,7 @@
       font-size: 0.76rem;
       padding: 2px 8px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.38);
+      border: 1px solid rgba(148,163,184,0.38);
       color: var(--text-soft);
       text-transform: uppercase;
       letter-spacing: 0.11em;
@@ -185,7 +184,7 @@
     .question {
       border-radius: var(--radius-sm);
       border: 1px solid var(--border);
-      background: rgba(15, 23, 42, 0.96);
+      background: rgba(15,23,42,0.96);
       padding: 10px 11px;
       font-size: 0.9rem;
     }
@@ -230,8 +229,8 @@
     details {
       margin-top: 6px;
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(55,65,81,0.9);
       font-size: 0.8rem;
       padding: 3px 10px;
       cursor: pointer;
@@ -254,11 +253,6 @@
       display: none;
     }
 
-    details span.chevron {
-      font-size: 0.85rem;
-      color: var(--text-soft);
-    }
-
     details .answer {
       margin-top: 4px;
       color: var(--text);
@@ -273,7 +267,7 @@
         "Liberation Mono", "Courier New", monospace;
       font-size: 0.78rem;
       overflow-x: auto;
-      border: 1px solid rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(15,23,42,0.9);
     }
 
     .pill-row {
@@ -287,8 +281,8 @@
       font-size: 0.72rem;
       padding: 4px 10px;
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(55,65,81,0.9);
       color: var(--text-soft);
     }
 
@@ -302,7 +296,7 @@
       margin-top: 28px;
       font-size: 0.8rem;
       color: var(--text-soft);
-      border-top: 1px solid rgba(30, 41, 59, 0.9);
+      border-top: 1px solid rgba(30,41,59,0.9);
       padding-top: 10px;
       display: flex;
       justify-content: space-between;
@@ -320,7 +314,7 @@
       font-size: 0.78rem;
       padding: 5px 10px;
       border-radius: 999px;
-      border: 1px dashed rgba(148, 163, 184, 0.4);
+      border: 1px dashed rgba(148,163,184,0.4);
       background: transparent;
       color: var(--text-soft);
       cursor: pointer;
@@ -333,7 +327,6 @@
     }
   </style>
 </head>
-
 <body>
   <div class="page">
     <header>
@@ -344,15 +337,17 @@
       <div>
         <h1>Unit Testing & Design Question Bank</h1>
         <p class="subtitle">
-          A consolidated practice set on Google Test, test doubles, design for testability,
-          refactoring, AAA &amp; FIRST principles, specification/boundary testing, and
-          time complexity.
+          A consolidated practice set on Google Test, test doubles, design for testability
+          & observability, refactoring, AAA &amp; FIRST principles, specification/boundary
+          testing, and time complexity — including theory from lectures and practical code from
+          the <code>exercise/</code>, <code>design_for_testability/observability</code>, and
+          <code>specification_testing</code> folders of the IT643 repository.
         </p>
       </div>
       <div class="meta-row">
         <div class="meta-pill">Format: MCQ, T/F, Fill, Short, Scenario, Coding</div>
-        <div class="meta-pill">Use: Mid-sem &amp; End-sem exams / practice</div>
-        <div class="meta-pill">Style: Arrange-Act-Assert &amp; design-focused</div>
+        <div class="meta-pill">Source: Lectures + GitHub repo (IT643)</div>
+        <div class="meta-pill">Focus: Good tests, good design</div>
       </div>
     </header>
 
@@ -606,7 +601,7 @@
                 <summary>Show answer <span class="chevron">▾</span></summary>
                 <div class="answer">
                   <strong>False.</strong> It violates the <em>Fast</em> and <em>Repeatable</em>
-                  aspects of FIRST and should usually be turned into an integration test.
+                  aspects of FIRST and should usually be an integration test.
                 </div>
               </details>
             </article>
@@ -997,7 +992,7 @@
                 <p>Include at least one normal case and one exception case.</p>
               </div>
               <div class="code">
-                <pre><code>// Example structure (answer outline)
+<pre><code>// Example structure (answer outline)
 TEST(DivideTest, NormalDivision) {
     // Arrange
     int a = 10, b = 2;
@@ -1032,7 +1027,7 @@ TEST(DivideTest, ThrowsOnZeroDivisor) {
                 </p>
               </div>
               <div class="code">
-                <pre><code>// Example structure (answer outline)
+<pre><code>// Example structure (answer outline)
 class IsEvenTest
     : public ::testing::TestWithParam&lt;std::pair&lt;int, bool&gt;&gt; {};
 
@@ -1066,7 +1061,7 @@ INSTANTIATE_TEST_SUITE_P(
                   briefly justify:
                 </p>
                 <div class="code">
-                  <pre><code>for (int i = 1; i &lt; n; i *= 2) {
+<pre><code>for (int i = 1; i &lt; n; i *= 2) {
     for (int j = 0; j &lt; n; ++j) {
         // constant work
     }
@@ -1083,6 +1078,211 @@ INSTANTIATE_TEST_SUITE_P(
             </article>
           </div>
         </section>
+
+        <!-- REPO-BASED SECTION: exercise + observability + specification_testing -->
+        <section class="section" id="repo-based">
+          <h2 class="section-title">
+            Repo-Based Questions
+            <span>exercise • observability • specification_testing</span>
+          </h2>
+          <p class="section-subtitle">
+            Questions tied to the IT643 GitHub repository:
+            <code>exercise/</code>,
+            <code>code/design_for_testability/observability</code>, and
+            <code>code/specification_testing</code>.
+            Replace filenames in the text below with your actual files if you want them to be
+            very specific.
+          </p>
+
+          <div class="question-list">
+            <!-- Repo Q1: exercise/ -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">Repo Q1</div>
+                <div class="question-points">6–8 marks</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  1. Open a C++ exercise file from the
+                  <code>exercise/</code> folder (e.g., <code>exercise_substrings_between.cpp</code>).
+                </p>
+                <ul class="options">
+                  <li>Identify the main unit(s) of behavior (functions or classes).</li>
+                  <li>
+                    Derive at least <strong>five specification-based test cases</strong> for one
+                    function, using only its description and expected behavior (not its code).
+                  </li>
+                  <li>
+                    Classify each test as <em>normal</em>, <em>boundary</em>, or
+                    <em>exceptional</em>.
+                  </li>
+                </ul>
+              </div>
+              <details>
+                <summary>Hint / outline <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  Think in terms of input partitions (valid/invalid ranges, empty vs non-empty,
+                  special values) and choose representatives for each, plus boundary values
+                  just around each important cutoff.
+                </div>
+              </details>
+            </article>
+
+            <!-- Repo Q2: observability -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">Repo Q2</div>
+                <div class="question-points">8–10 marks</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  2. Explore the code under
+                  <code>code/design_for_testability/observability</code>.
+                  It demonstrates how to expose system behavior so tests can observe it.
+                </p>
+                <ul class="options">
+                  <li>
+                    Explain what <strong>observability</strong> means in the context of unit testing.
+                  </li>
+                  <li>
+                    Identify at least two techniques in this code that improve observability
+                    (e.g., returning values instead of printing, exposing state via methods, using
+                    interfaces instead of globals).
+                  </li>
+                  <li>
+                    Rewrite a small part of the code (in pseudocode or C++) to make it even more
+                    testable by improving observability, and describe how you would test it using GTest.
+                  </li>
+                </ul>
+              </div>
+              <details>
+                <summary>Hint / outline <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  Observability is about being able to see the outcome of operations in tests,
+                  without relying on manual inspection (logs, console). Good patterns:
+                  methods that return data instead of printing directly, clear getters for state,
+                  and collaborators passed in as interfaces that can be replaced by test doubles.
+                </div>
+              </details>
+            </article>
+
+            <!-- Repo Q3: specification_testing folder -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">Repo Q3</div>
+                <div class="question-points">8–10 marks</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  3. Look at the implementation and tests in
+                  <code>code/specification_testing</code> (e.g., a function like
+                  <code>substringsBetween(str, open, close)</code>).
+                </p>
+                <ul class="options">
+                  <li>
+                    Describe the <strong>input partitions</strong> for each parameter:
+                    <code>str</code>, <code>open</code>, and <code>close</code>.
+                    (Think: null/empty, contains markers, no markers, overlapping markers, etc.)
+                  </li>
+                  <li>
+                    Propose a set of tests that gives good coverage of these partitions without
+                    combinatorial explosion.
+                  </li>
+                  <li>
+                    Show how you would implement these tests as a
+                    <strong>parameterized Google Test</strong> using
+                    <code>TestWithParam</code> and <code>INSTANTIATE_TEST_SUITE_P</code>.
+                  </li>
+                </ul>
+              </div>
+              <details>
+                <summary>Hint / outline <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  Typical partitions:
+                  <ul>
+                    <li><code>str</code>: null, empty, no delimiters, one pair, multiple pairs.</li>
+                    <li><code>open</code>/<code>close</code>: empty string, not found at all, same
+                        token, overlapping tokens.</li>
+                  </ul>
+                  Turn each combination you care about into a tuple: (str, open, close, expected).
+                </div>
+              </details>
+            </article>
+
+            <!-- Repo Q4: observability – logging vs return values -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">Repo Q4</div>
+                <div class="question-points">6–8 marks</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  4. Suppose a function in <code>observability/</code> currently prints debug
+                  information directly using <code>std::cout</code> and has a <code>void</code>
+                  return type.
+                </p>
+                <ul class="options">
+                  <li>
+                    Explain why this design is hard to test using traditional assertions.
+                  </li>
+                  <li>
+                    Refactor the function so that it returns a value (or a result object) that
+                    represents the information you want to check in tests.
+                  </li>
+                  <li>
+                    Write a small GTest example that asserts on this returned information,
+                    rather than console output.
+                  </li>
+                </ul>
+              </div>
+              <details>
+                <summary>Hint / outline <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  Tests work best when they compare values, not console side effects. Instead of
+                  printing “Processed 3 items”, return <code>3</code> or a struct with that information,
+                  then assert <code>EXPECT_EQ(result.count, 3)</code> in a test.
+                </div>
+              </details>
+            </article>
+
+            <!-- Repo Q5: combining exercise + specification_testing -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">Repo Q5</div>
+                <div class="question-points">8–10 marks</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  5. Choose any algorithmic exercise from <code>exercise/</code> (e.g., an
+                  <code>addStrings</code> or string/array manipulation problem), and treat it
+                  like the <code>specification_testing</code> examples.
+                </p>
+                <ul class="options">
+                  <li>
+                    Write a short natural-language <strong>specification</strong> of what the
+                    function does, including edge cases.
+                  </li>
+                  <li>
+                    From that specification, derive a table of test cases using partitions and
+                    boundaries (inputs, expected outputs).
+                  </li>
+                  <li>
+                    Optionally, implement those tests in GTest and comment on how well they
+                    protect you against regressions if you later refactor the function.
+                  </li>
+                </ul>
+              </div>
+              <details>
+                <summary>Hint / outline <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  Start from “what should happen” (e.g., adding numeric strings with carries),
+                  then list: smallest inputs, typical inputs, large inputs, invalid inputs if allowed,
+                  and tricky corners like leading zeros or empty strings.
+                </div>
+              </details>
+            </article>
+          </div>
+        </section>
       </main>
 
       <!-- SIDE CARD / SUMMARY -->
@@ -1092,7 +1292,8 @@ INSTANTIATE_TEST_SUITE_P(
           <p>
             Treat this like a mini exam portal: attempt questions first, then open the
             <em>Show answer</em> toggles to self-check. Use MCQs &amp; T/F to warm up,
-            then move to scenario and coding questions.
+            then move to scenario, coding, and repo-based questions connected to the
+            actual IT643 GitHub repository.
           </p>
           <div class="pill-row" style="margin-top:10px;">
             <div class="pill tag-primary">AAA &amp; FIRST</div>
@@ -1100,6 +1301,8 @@ INSTANTIATE_TEST_SUITE_P(
             <div class="pill">Mocks &amp; Stubs</div>
             <div class="pill">Refactoring</div>
             <div class="pill">Boundary tests</div>
+            <div class="pill">Observability</div>
+            <div class="pill">Spec-based tests</div>
             <div class="pill">Big-O</div>
           </div>
         </div>
@@ -1116,5 +1319,4 @@ INSTANTIATE_TEST_SUITE_P(
     </footer>
   </div>
 </body>
-
 </html>
