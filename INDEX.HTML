@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Unit Testing & Design – Question Bank</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-alt: #020617;
+      --card: #020617;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.1);
+      --text: #e5e7eb;
+      --text-soft: #9ca3af;
+      --border: #1f2937;
+      --danger: #f97373;
+      --code-bg: #020617;
+      --radius-lg: 16px;
+      --radius-sm: 8px;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.7);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #1e293b 0, #020617 60%);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--text-soft);
+      width: fit-content;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 4vw, 2.6rem);
+      letter-spacing: -0.03em;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      color: var(--text-soft);
+      max-width: 640px;
+      font-size: 0.95rem;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 4px;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .meta-pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(55, 65, 81, 0.8);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1fr);
+      gap: 18px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 880px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, #111827 0, #020617 50%);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 18px 16px;
+      backdrop-filter: blur(16px);
+    }
+
+    .card h2 {
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .card h2 span.icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .card p {
+      font-size: 0.86rem;
+      color: var(--text-soft);
+    }
+
+    .section {
+      margin-top: 22px;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title span {
+      font-size: 0.76rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.38);
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+    }
+
+    .section-subtitle {
+      font-size: 0.86rem;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+    }
+
+    .question-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .question {
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.96);
+      padding: 10px 11px;
+      font-size: 0.9rem;
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .question-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+    }
+
+    .question-points {
+      font-size: 0.72rem;
+      color: var(--text-soft);
+      white-space: nowrap;
+    }
+
+    .question-body {
+      margin-bottom: 4px;
+    }
+
+    .question-body p {
+      font-size: 0.9rem;
+    }
+
+    .options {
+      margin-top: 4px;
+      margin-left: 14px;
+    }
+
+    .options li {
+      margin-bottom: 2px;
+    }
+
+    details {
+      margin-top: 6px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      font-size: 0.8rem;
+      padding: 3px 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    details[open] {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+    }
+
+    details summary {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details span.chevron {
+      font-size: 0.85rem;
+      color: var(--text-soft);
+    }
+
+    details .answer {
+      margin-top: 4px;
+      color: var(--text);
+    }
+
+    .code {
+      margin-top: 6px;
+      background: var(--code-bg);
+      border-radius: var(--radius-sm);
+      padding: 8px 9px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+      font-size: 0.78rem;
+      overflow-x: auto;
+      border: 1px solid rgba(15, 23, 42, 0.9);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .pill {
+      font-size: 0.72rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      color: var(--text-soft);
+    }
+
+    .tag-primary {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    footer {
+      margin-top: 28px;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      border-top: 1px solid rgba(30, 41, 59, 0.9);
+      padding-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-strip {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .btn-ghost {
+      font-size: 0.78rem;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px dashed rgba(148, 163, 184, 0.4);
+      background: transparent;
+      color: var(--text-soft);
+      cursor: pointer;
+    }
+
+    .btn-ghost:hover {
+      border-style: solid;
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header>
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Unit Testing • Design • GTest • Time Complexity
+      </div>
+      <div>
+        <h1>Unit Testing & Design Question Bank</h1>
+        <p class="subtitle">
+          A consolidated practice set on Google Test, test doubles, design for testability,
+          refactoring, AAA &amp; FIRST principles, specification/boundary testing, and
+          time complexity.
+        </p>
+      </div>
+      <div class="meta-row">
+        <div class="meta-pill">Format: MCQ, T/F, Fill, Short, Scenario, Coding</div>
+        <div class="meta-pill">Use: Mid-sem &amp; End-sem exams / practice</div>
+        <div class="meta-pill">Style: Arrange-Act-Assert &amp; design-focused</div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <main>
+        <!-- MCQ SECTION -->
+        <section class="section" id="mcq">
+          <h2 class="section-title">
+            Multiple-Choice Questions
+            <span>Objective</span>
+          </h2>
+          <p class="section-subtitle">
+            Test your understanding of core ideas: AAA, FIRST, mocks, refactoring, coverage,
+            test design and complexity.
+          </p>
+
+          <div class="question-list">
+            <!-- Q1 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">MCQ 1</div>
+                <div class="question-points">1 mark</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  1. Which principle summarizes good attributes of unit tests:
+                  <em>Fast, Independent, Repeatable, Self-validating, Timely</em>?
+                </p>
+                <ol class="options" type="a">
+                  <li>SOLID</li>
+                  <li>DRY</li>
+                  <li>FIRST</li>
+                  <li>KISS</li>
+                </ol>
+              </div>
+              <details>
+                <summary>
+                  Show answer
+                  <span class="chevron">▾</span>
+                </summary>
+                <div class="answer">
+                  Correct option: <strong>c) FIRST</strong>.
+                </div>
+              </details>
+            </article>
+
+            <!-- Q2 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">MCQ 2</div>
+                <div class="question-points">1 mark</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  2. The <strong>Act</strong> step in Arrange-Act-Assert should usually contain:
+                </p>
+                <ol class="options" type="a">
+                  <li>Multiple unrelated method calls</li>
+                  <li>A single call that triggers the behavior under test</li>
+                  <li>All assertions</li>
+                  <li>Test data construction</li>
+                </ol>
+              </div>
+              <details>
+                <summary>Show answer <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  Correct option: <strong>b)</strong> — one business operation per unit test.
+                </div>
+              </details>
+            </article>
+
+            <!-- Q3 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">MCQ 3</div>
+                <div class="question-points">1 mark</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  3. Which Google Test macro <em>aborts</em> the current test function when it fails?
+                </p>
+                <ol class="options" type="a">
+                  <li>EXPECT_EQ</li>
+                  <li>EXPECT_TRUE</li>
+                  <li>ASSERT_EQ</li>
+                  <li>EXPECT_THROW</li>
+                </ol>
+              </div>
+              <details>
+                <summary>Show answer <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  Correct option: <strong>c) ASSERT_EQ</strong> (all ASSERT_* are fatal).
+                </div>
+              </details>
+            </article>
+
+            <!-- Q4 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">MCQ 4</div>
+                <div class="question-points">1 mark</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  4. Which of the following is a design smell revealed by difficult unit tests
+                  that require many dependencies just to construct one object?
+                </p>
+                <ol class="options" type="a">
+                  <li>Low cohesion</li>
+                  <li>Excessive coupling</li>
+                  <li>Shotgun surgery</li>
+                  <li>Temporary field</li>
+                </ol>
+              </div>
+              <details>
+                <summary>Show answer <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  Correct option: <strong>b)</strong> — heavy, tangled dependencies.
+                </div>
+              </details>
+            </article>
+
+            <!-- Q5 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">MCQ 5</div>
+                <div class="question-points">1 mark</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  5. Which time complexity best matches a typical binary search implementation?
+                </p>
+                <ol class="options" type="a">
+                  <li>O(1)</li>
+                  <li>O(log n)</li>
+                  <li>O(n)</li>
+                  <li>O(n²)</li>
+                </ol>
+              </div>
+              <details>
+                <summary>Show answer <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  Correct option: <strong>b) O(log n)</strong>.
+                </div>
+              </details>
+            </article>
+
+            <!-- Q6 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">MCQ 6</div>
+                <div class="question-points">1 mark</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  6. A <strong>mock</strong> object is primarily used to:
+                </p>
+                <ol class="options" type="a">
+                  <li>Generate random inputs</li>
+                  <li>Return canned values only</li>
+                  <li>Verify that specific calls were made with expected arguments</li>
+                  <li>Persist data to a real database</li>
+                </ol>
+              </div>
+              <details>
+                <summary>Show answer <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  Correct option: <strong>c)</strong>.
+                </div>
+              </details>
+            </article>
+
+            <!-- Q7 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">MCQ 7</div>
+                <div class="question-points">1 mark</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  7. A fake in-memory database used only in tests is best described as:
+                </p>
+                <ol class="options" type="a">
+                  <li>Dummy</li>
+                  <li>Stub</li>
+                  <li>Fake</li>
+                  <li>Spy</li>
+                </ol>
+              </div>
+              <details>
+                <summary>Show answer <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  Correct option: <strong>c) Fake</strong>.
+                </div>
+              </details>
+            </article>
+
+            <!-- Q8 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">MCQ 8</div>
+                <div class="question-points">1 mark</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  8. Which statement about code coverage is most accurate?
+                </p>
+                <ol class="options" type="a">
+                  <li>100% coverage means no bugs.</li>
+                  <li>Low coverage definitely indicates risk.</li>
+                  <li>High coverage automatically means good tests.</li>
+                  <li>Coverage should never be measured.</li>
+                </ol>
+              </div>
+              <details>
+                <summary>Show answer <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  Correct option: <strong>b)</strong> — low numbers are a strong negative signal;
+                  high numbers alone mean nothing.
+                </div>
+              </details>
+            </article>
+          </div>
+        </section>
+
+        <!-- TRUE/FALSE SECTION -->
+        <section class="section" id="tf">
+          <h2 class="section-title">
+            True / False
+            <span>Concept Check</span>
+          </h2>
+          <p class="section-subtitle">
+            Quickly validate your intuition on unit testing rules, design smells, and
+            external dependencies.
+          </p>
+
+          <div class="question-list">
+            <!-- T/F 1 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">T/F 1</div>
+                <div class="question-points">1 mark</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  1. A test that uses real network calls and third-party APIs still counts
+                  as a good unit test as long as it passes.
+                </p>
+              </div>
+              <details>
+                <summary>Show answer <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  <strong>False.</strong> It violates the <em>Fast</em> and <em>Repeatable</em>
+                  aspects of FIRST and should usually be turned into an integration test.
+                </div>
+              </details>
+            </article>
+
+            <!-- T/F 2 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">T/F 2</div>
+                <div class="question-points">1 mark</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  2. Multiple Arrange-Act-Assert sections in a single test is a smell; it
+                  usually indicates the test is doing too much.
+                </p>
+              </div>
+              <details>
+                <summary>Show answer <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  <strong>True.</strong> Prefer one AAA block per test (one behavior).
+                </div>
+              </details>
+            </article>
+
+            <!-- T/F 3 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">T/F 3</div>
+                <div class="question-points">1 mark</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  3. Tests should not contain <code>if</code> statements or complex logic if
+                  it can be avoided.
+                </p>
+              </div>
+              <details>
+                <summary>Show answer <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  <strong>True.</strong> Logic in tests increases maintenance cost and can
+                  hide failures.
+                </div>
+              </details>
+            </article>
+
+            <!-- T/F 4 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">T/F 4</div>
+                <div class="question-points">1 mark</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  4. A mock can also return canned values like a stub, but its main role is
+                  to verify interactions.
+                </p>
+              </div>
+              <details>
+                <summary>Show answer <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  <strong>True.</strong>
+                </div>
+              </details>
+            </article>
+
+            <!-- T/F 5 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">T/F 5</div>
+                <div class="question-points">1 mark</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  5. Refactoring is allowed to change external observable behavior as long
+                  as tests still pass.
+                </p>
+              </div>
+              <details>
+                <summary>Show answer <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  <strong>False.</strong> By definition, refactoring preserves observable behavior.
+                </div>
+              </details>
+            </article>
+          </div>
+        </section>
+
+        <!-- FILL-IN SECTION -->
+        <section class="section" id="fill">
+          <h2 class="section-title">
+            Fill in the Blanks
+            <span>Recall</span>
+          </h2>
+          <p class="section-subtitle">
+            Short recall drills on definitions and terminology.
+          </p>
+
+          <div class="question-list">
+            <!-- Fill 1 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">Fill 1</div>
+                <div class="question-points">1 mark</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  1. The recommended pattern for structuring unit tests is
+                  <strong>________-________-________</strong>.
+                </p>
+              </div>
+              <details>
+                <summary>Show answer <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  <strong>Arrange-Act-Assert</strong>.
+                </div>
+              </details>
+            </article>
+
+            <!-- Fill 2 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">Fill 2</div>
+                <div class="question-points">1 mark</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  2. A test that passes on one machine but fails on another because of
+                  timing or environment issues is called a
+                  <strong>________</strong> test.
+                </p>
+              </div>
+              <details>
+                <summary>Show answer <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  A <strong>flaky</strong> test.
+                </div>
+              </details>
+            </article>
+
+            <!-- Fill 3 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">Fill 3</div>
+                <div class="question-points">1 mark</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  3. A <strong>dummy</strong> object is passed only to satisfy a parameter
+                  and is never actually <strong>________</strong>.
+                </p>
+              </div>
+              <details>
+                <summary>Show answer <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  <strong>used</strong>.
+                </div>
+              </details>
+            </article>
+
+            <!-- Fill 4 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">Fill 4</div>
+                <div class="question-points">1 mark</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  4. In boundary testing, we pay special attention to values
+                  <strong>just below</strong>, <strong>at</strong>, and
+                  <strong>just above</strong> each <strong>________</strong>.
+                </p>
+              </div>
+              <details>
+                <summary>Show answer <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  <strong>boundary</strong> (cut-off).
+                </div>
+              </details>
+            </article>
+          </div>
+        </section>
+
+        <!-- SHORT ANSWER SECTION -->
+        <section class="section" id="short-answer">
+          <h2 class="section-title">
+            Short Answer
+            <span>Conceptual</span>
+          </h2>
+          <p class="section-subtitle">
+            2–3 line answers focusing on core reasoning and design intuition.
+          </p>
+
+          <div class="question-list">
+            <!-- SA 1 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">SA 1</div>
+                <div class="question-points">3 marks</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  1. Define a unit test. What are the three key properties it should have?
+                </p>
+              </div>
+              <details>
+                <summary>Sample answer <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  A unit test is an automated test that verifies a single unit of behavior quickly and in isolation.
+                  It should be: fast, deterministic (repeatable), and independent of other tests.
+                </div>
+              </details>
+            </article>
+
+            <!-- SA 2 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">SA 2</div>
+                <div class="question-points">3 marks</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  2. Why is testability considered a design smell indicator? Give one example.
+                </p>
+              </div>
+              <details>
+                <summary>Sample answer <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  When code is difficult to test (requires lots of setup or hidden state),
+                  it often reveals excessive coupling or violation of SRP. For example,
+                  a class that talks directly to a DB, sends emails, and implements business
+                  logic in the same method is both hard to test and poorly designed.
+                </div>
+              </details>
+            </article>
+
+            <!-- SA 3 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">SA 3</div>
+                <div class="question-points">3 marks</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  3. Distinguish between a <strong>mock</strong> and a
+                  <strong>stub</strong>.
+                </p>
+              </div>
+              <details>
+                <summary>Sample answer <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  A stub provides canned responses for inputs but is not checked for
+                  how it was called; a mock is pre-programmed with expectations and the
+                  test fails if calls don’t match the expected interactions.
+                </div>
+              </details>
+            </article>
+
+            <!-- SA 4 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">SA 4</div>
+                <div class="question-points">3 marks</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  4. What is the main goal of refactoring? How does a good test suite
+                  support it?
+                </p>
+              </div>
+              <details>
+                <summary>Sample answer <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  Refactoring aims to improve internal structure without changing observable behavior.
+                  A good test suite guards behavior, so you can confidently change internals, knowing
+                  you have a safety net against regressions.
+                </div>
+              </details>
+            </article>
+          </div>
+        </section>
+
+        <!-- SCENARIO SECTION -->
+        <section class="section" id="scenario">
+          <h2 class="section-title">
+            Scenario / Case Study
+            <span>Long Answer</span>
+          </h2>
+          <p class="section-subtitle">
+            Use these for 6–10 mark exam questions or project discussions.
+          </p>
+
+          <div class="question-list">
+            <!-- Scenario 1 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">Scenario 1</div>
+                <div class="question-points">8–10 marks</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  1. You have a class <code>InvoiceFilter</code> that connects to a real
+                  database, filters low-value invoices (&lt; 100), prints them to console, and
+                  sends a notification. All of this happens in a single method.
+                </p>
+                <ul class="options">
+                  <li>Identify at least three design smells in this setup.</li>
+                  <li>Explain why unit testing this method is painful.</li>
+                  <li>
+                    Propose a refactored design using interfaces, dependency injection, and
+                    separation of concerns that makes the logic easier to unit test.
+                  </li>
+                </ul>
+              </div>
+              <details>
+                <summary>Hint / outline <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  Smells: mixed domain &amp; infrastructure concerns, excessive coupling,
+                  violation of SRP, hard dependency on DB. Suggested solution:
+                  extract repository, notifier, and filtering logic into separate
+                  components; depend on abstractions injected into a service; unit test
+                  with fakes/mocks instead of the real DB.
+                </div>
+              </details>
+            </article>
+
+            <!-- Scenario 2 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">Scenario 2</div>
+                <div class="question-points">6–8 marks</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  2. A grading function <code>gradeFromMarks(int marks)</code> has ranges:
+                  90–100 → A, 75–89 → B, 50–74 → C, &lt;50 → F.
+                </p>
+                <ul class="options">
+                  <li>Design boundary test cases for this method.</li>
+                  <li>
+                    Show how you would implement these in Google Test using clear AAA
+                    structure.
+                  </li>
+                  <li>
+                    Briefly comment on how this relates to partitioning and boundary
+                    testing theory.
+                  </li>
+                </ul>
+              </div>
+              <details>
+                <summary>Hint / outline <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  Use values just below, at, and just above each threshold: 49/50, 74/75, 89/90.
+                  Each test: Arrange (marks), Act (call function), Assert (expected grade).
+                </div>
+              </details>
+            </article>
+          </div>
+        </section>
+
+        <!-- CODING SECTION -->
+        <section class="section" id="coding">
+          <h2 class="section-title">
+            Coding / GTest Tasks
+            <span>Implementation</span>
+          </h2>
+          <p class="section-subtitle">
+            Hands-on questions for writing tests and thinking about complexity.
+          </p>
+
+          <div class="question-list">
+            <!-- Coding 1 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">Code 1</div>
+                <div class="question-points">4–6 marks</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  1. Write Google Tests (using GTest) for a function
+                  <code>int divide(int a, int b)</code> with this behavior:
+                </p>
+                <ul class="options">
+                  <li>For <code>b != 0</code>, returns integer division <code>a / b</code>.</li>
+                  <li>
+                    For <code>b == 0</code>, throws <code>std::invalid_argument</code>.
+                  </li>
+                </ul>
+                <p>Include at least one normal case and one exception case.</p>
+              </div>
+              <div class="code">
+                <pre><code>// Example structure (answer outline)
+TEST(DivideTest, NormalDivision) {
+    // Arrange
+    int a = 10, b = 2;
+    // Act
+    int result = divide(a, b);
+    // Assert
+    EXPECT_EQ(result, 5);
+}
+
+TEST(DivideTest, ThrowsOnZeroDivisor) {
+    // Arrange
+    int a = 10, b = 0;
+    // Act + Assert
+    EXPECT_THROW(divide(a, b), std::invalid_argument);
+}</code></pre>
+              </div>
+            </article>
+
+            <!-- Coding 2 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">Code 2</div>
+                <div class="question-points">4–6 marks</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  2. Implement a parameterized Google Test for a function
+                  <code>bool isEven(int n)</code> using the following (input, expected) pairs:
+                  <code>(-2, true)</code>, <code>(-1, false)</code>,
+                  <code>(0, true)</code>, <code>(1, false)</code>,
+                  <code>(100, true)</code>.
+                </p>
+              </div>
+              <div class="code">
+                <pre><code>// Example structure (answer outline)
+class IsEvenTest
+    : public ::testing::TestWithParam&lt;std::pair&lt;int, bool&gt;&gt; {};
+
+TEST_P(IsEvenTest, WorksForVariousInputs) {
+    auto [input, expected] = GetParam();
+    EXPECT_EQ(isEven(input), expected);
+}
+
+INSTANTIATE_TEST_SUITE_P(
+    IsEvenValues,
+    IsEvenTest,
+    ::testing::Values(
+        std::make_pair(-2, true),
+        std::make_pair(-1, false),
+        std::make_pair(0, true),
+        std::make_pair(1, false),
+        std::make_pair(100, true)
+));</code></pre>
+              </div>
+            </article>
+
+            <!-- Coding 3 -->
+            <article class="question">
+              <div class="question-header">
+                <div class="question-label">Code 3</div>
+                <div class="question-points">4–6 marks</div>
+              </div>
+              <div class="question-body">
+                <p>
+                  3. For the following nested loop, determine the time complexity and
+                  briefly justify:
+                </p>
+                <div class="code">
+                  <pre><code>for (int i = 1; i &lt; n; i *= 2) {
+    for (int j = 0; j &lt; n; ++j) {
+        // constant work
+    }
+}</code></pre>
+                </div>
+              </div>
+              <details>
+                <summary>Sample answer <span class="chevron">▾</span></summary>
+                <div class="answer">
+                  Outer loop runs O(log n) times (i doubles each time), inner loop runs
+                  O(n) each time ⇒ overall O(n log n).
+                </div>
+              </details>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <!-- SIDE CARD / SUMMARY -->
+      <aside>
+        <div class="card">
+          <h2><span class="icon">📚</span> How to Use This Page</h2>
+          <p>
+            Treat this like a mini exam portal: attempt questions first, then open the
+            <em>Show answer</em> toggles to self-check. Use MCQs &amp; T/F to warm up,
+            then move to scenario and coding questions.
+          </p>
+          <div class="pill-row" style="margin-top:10px;">
+            <div class="pill tag-primary">AAA &amp; FIRST</div>
+            <div class="pill">Google Test</div>
+            <div class="pill">Mocks &amp; Stubs</div>
+            <div class="pill">Refactoring</div>
+            <div class="pill">Boundary tests</div>
+            <div class="pill">Big-O</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <div>✅ Static HTML • No build tools required — just open in a browser.</div>
+      <div class="btn-strip">
+        <button class="btn-ghost" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+          Back to top
+        </button>
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>
